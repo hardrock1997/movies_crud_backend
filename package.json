@@ -4,7 +4,7 @@
   "description": "crud apis for movies",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start":"nodemon main.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/hardrock1997/movies_crud_backend/issues"
   },
-  "homepage": "https://github.com/hardrock1997/movies_crud_backend#readme"
+  "homepage": "https://github.com/hardrock1997/movies_crud_backend#readme",
+  "dependencies": {
+    "nodemon": "^3.1.9"
+  }
 }
