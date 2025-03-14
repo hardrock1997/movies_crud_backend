@@ -1,0 +1,19 @@
+{
+  "name": "movies_crud_backend",
+  "version": "1.0.0",
+  "description": "crud apis for movies",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hardrock1997/movies_crud_backend.git"
+  },
+  "author": "yash",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hardrock1997/movies_crud_backend/issues"
+  },
+  "homepage": "https://github.com/hardrock1997/movies_crud_backend#readme"
+}
