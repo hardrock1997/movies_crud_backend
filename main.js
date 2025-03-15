@@ -1,11 +1,12 @@
 const http = require("http");
 const url = require("url");
-const fsP = require("fs/promises")
+const fsP = require("fs/promises");
 
-const getMovie = require("./API/getMovie");
-const getMovies = require("./API/getMovies");
-const deleteMovie = require("./API/deleteMovie");
+const getRecipe = require("./API/getRecipe");
+const getRecipes = require("./API/getRecipes");
+const deleteRecipe = require("./API/deleteRecipe");
 const createRecipe = require("./API/createRecipe");
+const updateRecipe = require("./API/updateRecipe");
 
 const PORT = process.env.PORT || 5002;
 
@@ -19,14 +20,15 @@ const server = http.createServer(async (req, res) => {
         const id = +requestURL.query.id;
 
         if (req.method === "GET") {
-          getMovie(recipes, req, res, id);
+          getRecipe(recipes, req, res, id);
         } else if (req.method === "PUT") {
+          updateRecipe(recipes, req, res, id);
         } else if (req.method === "DELETE") {
-          deleteMovie(recipes, req, res, id);
+          deleteRecipe(recipes, req, res, id);
         }
       } else {
         if (req.method === "GET") {
-          getMovies(recipesData, req, res);
+          getRecipes(recipesData, req, res);
         } else if (req.method === "POST") {
           createRecipe(recipes, req, res);
         }
