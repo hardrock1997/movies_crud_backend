@@ -1,99 +1,52 @@
-const http = require("http")
+const http = require("http");
+const url = require("url");
 const fsP = require("fs/promises")
-const url =require("url")
-const PORT = process.env.PORT || 5002
-const server = http.createServer(async (req,res)=>{
-    const recipesData = await fsP.readFile("./data/recipes.json","utf-8")
-    let recipes = JSON.parse(recipesData).recipes
-    const requestURL = url.parse(req.url,true)
-    try {
-    if(requestURL.pathname==="/") {
 
-    }
-    else if(requestURL.pathname==="/api/movies") {
-        if(requestURL.query.id) {
-            const id = +requestURL.query.id
+const getMovie = require("./API/getMovie");
+const getMovies = require("./API/getMovies");
+const deleteMovie = require("./API/deleteMovie");
+const createRecipe = require("./API/createRecipe");
 
-            if(req.method==="GET") {
-                const recipeObject = recipes.filter(movie=>movie.id===id)[0]
-                if (!recipeObject) {
-                    res.statusCode=404
-                    res.setHeader("Content-Type", "application/json");
-                    res.end(JSON.stringify({ error: "Recipe not found" }));
-                }
-                res.setHeader("Content-type","application/json")
-                res.end(JSON.stringify({ movie: recipeObject }))
+const PORT = process.env.PORT || 5002;
 
-            }
-            else if(req.method==="POST") {
+const server = http.createServer(async (req, res) => {
+  const recipesData = await fsP.readFile("./data/recipes.json", "utf-8");
+  let recipes = JSON.parse(recipesData).recipes;
+  const requestURL = url.parse(req.url, true);
+  try {
+    if (requestURL.pathname === "/api/recipes") {
+      if (requestURL.query.id) {
+        const id = +requestURL.query.id;
 
-            }
-            else if(req.method==="PUT") {
-
-            }
-            else if(req.method==="DELETE") {
-                if(recipes.length===0) {
-                    res.statusCode=404
-                    res.setHeader("Content-Type", "application/json")
-                    res.end(JSON.stringify({ message: "No recipes found!" }))
-                }
-                let recipeIndex= recipes.findIndex(movie=>movie?.id===id)
-                if(recipeIndex!==-1) {
-                    recipes.splice(recipeIndex,1)
-                    res.statusCode=200
-                    res.setHeader("Content-Type", "application/json")
-                    await fsP.writeFile("./data/recipes.json",JSON.stringify({recipes:recipes}, null, 2),(err)=>{
-                        if(err) {
-                            console.log("write error",err)
-                        }
-                        else {
-                            console.log("OVERWRITTEN!")
-                        }
-                    })
-                    res.end(JSON.stringify({ message: "Recipe deleted successfully" }))
-
-                }
-                else {
-                    res.statusCode=404
-                    res.setHeader("Content-Type", "application/json");
-                    res.end(JSON.stringify({ error: "Recipe not found" }));
-                }
-            }
+        if (req.method === "GET") {
+          getMovie(recipes, req, res, id);
+        } else if (req.method === "PUT") {
+        } else if (req.method === "DELETE") {
+          deleteMovie(recipes, req, res, id);
         }
-        else {
-            res.statusCode=200
-            res.setHeader("Content-type","application/json")
-            res.end(recipesData)
+      } else {
+        if (req.method === "GET") {
+          getMovies(recipesData, req, res);
+        } else if (req.method === "POST") {
+          createRecipe(recipes, req, res);
         }
+      }
+    } else {
+      res.statusCode = 404;
+      res.setHeader("Content-type", "application/json");
+      res.end(JSON.stringify({ message: "You are on the wrong route!!!" }));
     }
-    else {
-        res.statusCode=404
-        res.setHeader("Content-type","application/json")
-        res.end(JSON.stringify({"message":"You are on the wrong route!!!"}))
-    }
-}
-catch(err) {
-    console.log(err)
-}
-})
+  } catch (err) {
+    console.log(err);
+  }
+});
 
-server.listen(PORT,()=>{
-    console.log(`listening on port: ${PORT}`)
-})
-
-
-
-
-
-
-
-
-
-
-
-
+server.listen(PORT, () => {
+  console.log(`listening on port: ${PORT}`);
+});
 
 /**
+ * RECIPES BACKUP
  * {
     "recipes": [
       {

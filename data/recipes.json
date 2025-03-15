@@ -1,27 +1,6 @@
 {
   "recipes": [
     {
-      "id": 1,
-      "name": "Classic Margherita Pizza",
-      "prepTimeMinutes": 20,
-      "cookTimeMinutes": 15,
-      "servings": 4,
-      "difficulty": "Easy",
-      "cuisine": "Italian",
-      "caloriesPerServing": 300,
-      "tags": [
-        "Pizza",
-        "Italian"
-      ],
-      "userId": 166,
-      "image": "https://cdn.dummyjson.com/recipe-images/1.webp",
-      "rating": 4.6,
-      "reviewCount": 98,
-      "mealType": [
-        "Dinner"
-      ]
-    },
-    {
       "id": 2,
       "name": "Vegetarian Stir-Fry",
       "prepTimeMinutes": 15,
@@ -661,7 +640,6 @@
     {
       "id": 30,
       "name": "Brazilian Caipirinha",
-
       "prepTimeMinutes": 5,
       "cookTimeMinutes": 0,
       "servings": 1,
@@ -680,9 +658,26 @@
       "mealType": [
         "Beverage"
       ]
+    },
+    {
+      "id": 32,
+      "name": "Momos",
+      "prepTimeMinutes": 20,
+      "cookTimeMinutes": 15,
+      "servings": 4,
+      "difficulty": "Easy",
+      "cuisine": "Japanese",
+      "caloriesPerServing": 300,
+      "tags": [
+        "FastFood"
+      ],
+      "userId": null,
+      "image": null,
+      "rating": 4.6,
+      "reviewCount": 98,
+      "mealType": [
+        "Dinner"
+      ]
     }
-  ],
-  "total": 50,
-  "skip": 0,
-  "limit": 30
+  ]
 }
